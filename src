@@ -1,0 +1,21 @@
+package datafirst;
+import java.sql.*;
+// create table in database through java_program
+public class FirstJDBC {
+	public static void main(String[] args) {
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/chanda","root","system");
+			String q="create table student(s_no int,name varchar(5),mobile_no int,gender varchar(6))";
+			Statement stmt = con.createStatement();
+			stmt.executeUpdate(q);
+			System.out.println("table created...");
+			con.close();	
+		}
+		catch(Exception e)	
+		{
+			e.printStackTrace();
+		}
+	}
+
+}
