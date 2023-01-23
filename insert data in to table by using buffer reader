@@ -1,0 +1,46 @@
+package dynamicpro;
+
+import java.io.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+
+public class Dynamic {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/chanda","root","system");
+			String q="insert into student(s_no,name,mobile_no,gender) values(?,?,?,?)";
+			PreparedStatement pstmt=con.prepareStatement(q);
+			BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+			
+			System.out.println("enter the S_no:");
+			int s_no= Integer.parseInt(br.readLine());
+			
+			System.out.println("enter the name");
+			String name=br.readLine();
+			
+			System.out.println("enter mobile no");
+			int mobile_no=Integer.parseInt(br.readLine());
+			
+			System.out.println("enter gender");
+			String gender=br.readLine();
+			
+			
+			pstmt.setInt(1,s_no);
+			pstmt.setString(2,name);
+			pstmt.setInt(3,mobile_no); 
+			pstmt.setString(4,gender);
+			pstmt.executeUpdate();
+			System.out.println("inserted...");
+			con.close();	
+		}
+		catch(Exception e)	
+		{
+			e.printStackTrace();
+		}
+	}
+
+}
